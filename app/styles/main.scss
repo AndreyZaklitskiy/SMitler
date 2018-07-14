@@ -68,6 +68,7 @@ section, header {
 }
 
 .phone {
+  @extend .hidden-xs;
   position: absolute;
   right: 90px;
   top: 44px;
@@ -80,7 +81,7 @@ section, header {
     margin-right: 3px;
   }
 }
-/* оформление кнопки */
+/* оформление оранжевой кнопки */
 .button {
   display: inline-block;
   border: none;
@@ -126,7 +127,27 @@ section, header {
       opacity: .32;
     }
   }
+  /* оформление белой кнопки */
+  &.button-white {
+    background-color: #fff;
+    color: #444;
+    &::after {
+      background-color: rgba(#000, .6);
+    }
+    &:hover {
+      &::after {
+        background-color: rgba(#000, .2);
+      }
+    }
+    &:active {
+      &::after {
+        background-color: rgba(#000, .4);
+      }
+    }
+  }
 }
+
+
 
 /* оформление бургера */
 .hamburger {
@@ -259,6 +280,7 @@ html.mm-wrapper_opened {
     }
   }
   .h1 {
+    font-family: 'ralewaythin', sans-serif;
     font-weight: 100;
     text-transform: uppercase;
     font-size: 70px;
@@ -329,12 +351,181 @@ html.mm-wrapper_opened {
     margin-right: 5px;
     color: #555;
   }
-  .fas {
-    font-size: 16px;
-  }
   .phone-h {
     font-family: 'firasansregular', sans-serif;
     text-align: center;
     text-align: center;
   }
 }
+/* скрипт раскраски карусели */
+$colors: $blue, $red, $accent;
+@for $i from 1 through length($colors){
+  .carousel-services .owl-item:nth-child(#{length($colors)}n+#{$i}) {
+    background-color: nth($colors, $i);
+  }
+}
+
+.carousel-services {
+  background-color: $dark;
+  &-item {
+    position: relative;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column-reverse;
+    &:hover {
+      .carousel-services-image {
+        opacity: 1;
+      }
+    }
+    .carousel-logo {
+      text-align: center;
+      img {
+        width: 100px;
+        display: inline-block;
+      }
+    }
+  }
+  .owl-item {
+    &:nth-child(2n+2) {
+      .carousel-services-item {
+        flex-direction: column;
+      }
+    }
+  }
+  &-image {
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+    opacity: .8;
+    transition: opacity .5s ease;
+  }
+  &-content {
+    position: relative;
+    padding: 50px 10% 80px;
+  }
+  &-composition {
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    .h3 {
+      font-weight: 800;
+      font-size: 28px;
+      font-family: 'ralewayextrabold', sans-serif;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      span {
+        font-weight: normal;
+        font-size: 18px;
+        font-family: 'ralewaylight', sans-serif;
+        display: block;
+      }
+    }
+  }
+  &-list {
+    margin-bottom: 25px;
+    li {
+      padding: 9px;
+      border-bottom: 1px solid rgba(#000, .12);
+      strong {
+        font-family: 'firasansregular', sans-serif;
+        color: #4A4A4A;
+        .fas {
+          font-size: 14px;
+        }
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .owl-nav {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    > button {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      text-align: center;
+      background-color: #ffffff !important;
+      color: $dark !important;
+      line-height: 64px !important;
+      font-size: 26px !important;
+      &.owl-prev {
+        left: 0;
+      }
+      &.owl-next {
+        right: 0;
+      }
+    }
+  }
+}
+
+.owl-carousel {
+  .owl-item {
+    -webkit-backface-visibility: inherit;
+    -moz-backface-visibility: inherit;
+    -ms-backface-visibility: inherit;
+    backface-visibility: inherit;
+  }
+}
+
+
+/* media */
+
+@media (max-width: 1200px) {
+  .welcome .h1 {
+    font-size: 64px;
+  }
+  .header-contacts {
+    font-size: 14px;
+  }
+
+  .carousel-services-item {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 992px) {
+  .welcome .h1 {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-contacts  {
+    .phone-h {
+      -ms-text-align-last: left;
+      text-align-last: left;
+    }
+  }
+  .button {
+    padding: 12px 40px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .welcome {
+    p {
+      span {
+        font-size: 8px;
+      }
+    }
+    .h1 {
+      font-size: 28px;
+    }
+    strong {
+      margin-top: 14px;
+      font-size: 14px;
+    }
+  }
+  .header-composition {
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
