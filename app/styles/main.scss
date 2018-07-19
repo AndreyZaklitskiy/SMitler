@@ -59,6 +59,27 @@ section, header {
   background-size: cover;
 }
 
+section {
+  background-color: #fff;
+  &.inverse {
+    color: #fff;
+    background-color: $dark;
+    &.s-call {
+      background-color: #fff;
+    }
+  }
+  .h2 {
+    font-size: 30px;
+    font-family: 'ralewayextrabold', sans-serif;
+    font-weight: 800;
+    color: $accent;
+    span {
+      color: #fff;
+    }
+  }
+}
+
+
 .logo {
   img {
     margin-left: 45px;
@@ -451,7 +472,7 @@ $colors: $blue, $red, $accent;
       text-align: center;
       background-color: #ffffff !important;
       color: $dark !important;
-      line-height: 64px !important;
+      line-height: 58px !important;
       font-size: 26px !important;
       &.owl-prev {
         left: 0;
@@ -472,6 +493,195 @@ $colors: $blue, $red, $accent;
   }
 }
 
+.s {
+  &-king, &-review, &-partners {
+    padding: 5% 0;
+  }
+  /* секция с фоторамой */
+  &-king {
+    p {
+      margin: 30px 0;
+      font-size: 18px;
+    }
+  }
+  /* секция формы */
+  &-call {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    &::before {
+      content: '';
+      width: 50%;
+      right: 0;
+      height: 100%;
+      position: absolute;
+      background-color: rgba($accent, .92);
+    }
+  }
+}
+
+.section-overlay {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $over;
+    opacity: .92;
+
+  }
+}
+
+.fotorama {
+  background-color: rgba($dark, .4);
+  &__nav {
+    &-wrap {
+      position: absolute;
+      bottom: 15px;
+      padding: 0 20px;
+      width: 100%;
+
+    }
+  }
+  &__thumb {
+    border: 4px #fff solid;
+    transition: border-color .5s ease;
+    &-border {
+      border-color: #3d3c3c;
+    }
+  }
+  &__nav:after, &__stage:after, &__nav:before, &__stage:before {
+    display: none;
+  }
+}
+
+input, textarea, select,
+.selectize-control .selectize-input,
+.selectize-control.single .selectize-input.input-active {
+  background-color: transparent;
+  border: rgba(#000, .1) 1px solid;
+  border-bottom: rgba(#000, .1) 2px solid;
+  border-radius: 2px;
+  padding: 8px 22px;
+  outline: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: 'ralewayregular', sans-serif;
+  color: #333;
+}
+select {
+  padding: 10px 22px;
+}
+
+
+.selectize-control .selectize-input {
+  box-shadow: none; overflow: inherit;
+  line-height: inherit;
+  text-align: left;
+  input {
+    font-size: 16px;
+  }
+  &.dropdown-active::before {
+    background-color: transparent;
+  }
+}
+
+.selectize-control.single {
+  .selectize-input, &.dropdown-active {
+    &::after {
+      border-color: #fff transparent transparent transparent;
+    }
+    &.dropdown-active::after {
+      border-color: transparent transparent #fff transparent;
+    }
+  }
+  .selectize-dropdown {
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+    text-align: left;
+    &-content {
+      .option {
+        padding: 10px 22px;
+        &.active {
+          background-color: lighten($accent, 10);
+        }
+      }
+    }
+  }
+}
+
+
+/* спасибо за заявку */
+.success {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  z-index: 10;
+  span {
+    margin: auto;
+  }
+  &~* {
+    transition: all .5s ease;
+  }
+  &.active {
+    &~* {
+      opacity: .5;
+      filter: blur(10px);
+    }
+  }
+}
+
+/* форма */
+.callback {
+  position: relative;
+  padding: 25% 0;
+  color: #fff;
+  &-logo {
+    img {
+      width: 100px;
+      height: auto;
+    }
+  }
+  .formhead {
+    margin: 0;
+    color: #fff;
+  }
+  p {
+
+  }
+  input, textarea, select,
+  .selectize-control .selectize-input,
+  .selectize-control.single .selectize-input.input-active{
+    color: #fff;
+    width: 100%;
+    margin-top: 17px;
+    &::-webkit-input-placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+    &::-moz-placeholder {
+      color: #fff;
+      opacity: 1;
+    }
+    &::-ms-input-placeholder {
+      color: #fff;
+    }
+  }
+  option {
+    color: #333;
+  }
+  button {
+    margin-top: 34px;
+  }
+}
 
 /* media */
 
@@ -486,11 +696,29 @@ $colors: $blue, $red, $accent;
   .carousel-services-item {
     flex-direction: column;
   }
+  .s {
+    &-king, &-review, &-partners {
+      padding: 8% 0;
+    }
+    &-call {
+      -webkit-background-size: cover;
+      background-size: cover;
+    }
+  }
+
 }
 
 @media (max-width: 992px) {
   .welcome .h1 {
     font-size: 48px;
+  }
+  .s-call {
+    &::before {
+      width: 100%;
+    }
+    .callback {
+      padding: 12% 0;
+    }
   }
 }
 
@@ -505,7 +733,13 @@ $colors: $blue, $red, $accent;
     padding: 12px 40px;
   }
 }
-
+@media (max-width: 575px) {
+  .s {
+    &-call {
+      background-position: -400px;
+    }
+  }
+}
 
 @media (max-width: 480px) {
   .welcome {
