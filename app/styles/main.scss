@@ -47,6 +47,52 @@ body {
   }
 }
 
+@mixin opacity($opacity) {
+  opacity: $opacity /100;
+  filter: alpha(opacity=$opacity);
+}
+
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background-color: $dark;
+  .pulse {
+    position: relative;
+    left: 50%;
+    top: 50vh;
+    margin-left: -40px;
+    margin-top: -40px;
+    &::before, &::after {
+      content: '';
+      border: 5px solid #323232;
+      width: 80px;
+      height: 80px;
+      border-radius: 500px;
+      position: absolute;
+    }
+    &::before {
+      animation: polse-outer .8s ease-in infinite;
+    }
+    &::after {
+      animation: polse-inner .8s linear infinite;
+    }
+  }
+}
+
+@keyframes polse-outer {
+  0% {@include opacity(100)}
+  50% {@include opacity(50)}
+  100% {@include opacity(0)}
+}
+@keyframes polse-inner {
+  0% {@include opacity(0); transform: scale(0);}
+  100% {@include opacity(100); transform: scale(1);}
+}
+
 .h1, .h2, .h3, .h4, .h5, .h6 {
   line-height: 1.4;
   text-transform: uppercase;
@@ -57,6 +103,10 @@ section, header {
   background-position: center;
   -webkit-background-size: cover;
   background-size: cover;
+}
+
+a {
+  color: $accent;
 }
 
 section {
@@ -78,7 +128,6 @@ section {
     }
   }
 }
-
 
 .logo {
   img {
@@ -102,6 +151,7 @@ section {
     margin-right: 3px;
   }
 }
+
 /* оформление оранжевой кнопки */
 .button {
   display: inline-block;
@@ -168,8 +218,6 @@ section {
   }
 }
 
-
-
 /* оформление бургера */
 .hamburger {
   position: absolute;
@@ -179,6 +227,7 @@ section {
     width: 34px;
   }
 }
+
 .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -187,6 +236,7 @@ section {
   width: 34px;
   height: 2px;
 }
+
 .mm-navbar {
   position: relative;
   height: auto;
@@ -200,9 +250,11 @@ section {
     }
   }
 }
+
 html.mm-wrapper_opened {
   overflow-y: scroll;
 }
+
 .mm-panels {
   .mm-panel {
     &_has-navbar {
@@ -210,22 +262,28 @@ html.mm-wrapper_opened {
     }
   }
 }
+
 .mm-listitem_selected {
 
 }
+
 .mm-listitem:after {
   display: none;
 }
+
 .mm-menu_theme-black .mm-listitem_selected > a:not(.mm-btn_next), .mm-menu_theme-black .mm-listitem_selected > span {
   background-color: transparent;
   color: $accent;
 }
+
 .mm-panel:after, .mm-panel:before {
   height: 0;
 }
+
 .mm-panels > .mm-panel > .mm-listview:first-child, .mm-panels > .mm-panel > .mm-navbar + .mm-listview {
   margin-top: 0;
 }
+
 .mm-listview {
   > li {
     > a {
@@ -257,16 +315,17 @@ html.mm-wrapper_opened {
   }
 }
 
-
 .header-flex {
   position: relative;
   display: flex;
   height: 100%;
   top: 0;
 }
+
 .flex-center {
   margin: auto;
 }
+
 .header-composition {
   position: relative;
   text-align: center;
@@ -278,6 +337,7 @@ html.mm-wrapper_opened {
     letter-spacing: .5px;
   }
 }
+
 .welcome {
   p {
     text-transform: uppercase;
@@ -359,6 +419,7 @@ html.mm-wrapper_opened {
     }
   }
 }
+
 .header-contacts {
   position: absolute;
   bottom: 0;
@@ -378,9 +439,10 @@ html.mm-wrapper_opened {
     text-align: center;
   }
 }
+
 /* скрипт раскраски карусели */
 $colors: $blue, $red, $accent;
-@for $i from 1 through length($colors){
+@for $i from 1 through length($colors) {
   .carousel-services .owl-item:nth-child(#{length($colors)}n+#{$i}) {
     background-color: nth($colors, $i);
   }
@@ -549,7 +611,6 @@ $colors: $blue, $red, $accent;
     height: 100%;
     background-color: $over;
     opacity: .92;
-
   }
 }
 
@@ -590,13 +651,14 @@ input, textarea, select,
   font-family: 'ralewayregular', sans-serif;
   color: #333;
 }
+
 select {
   padding: 10px 22px;
 }
 
-
 .selectize-control .selectize-input {
-  box-shadow: none; overflow: inherit;
+  box-shadow: none;
+  overflow: inherit;
   line-height: inherit;
   text-align: left;
   input {
@@ -633,7 +695,6 @@ select {
   }
 }
 
-
 /* спасибо за заявку */
 .success {
   display: none;
@@ -648,11 +709,11 @@ select {
   span {
     margin: auto;
   }
-  &~* {
+  & ~ * {
     transition: all .5s ease;
   }
   &.active {
-    &~* {
+    & ~ * {
       opacity: .5;
       filter: blur(10px);
     }
@@ -679,7 +740,7 @@ select {
   }
   input, textarea, select,
   .selectize-control .selectize-input,
-  .selectize-control.single .selectize-input.input-active{
+  .selectize-control.single .selectize-input.input-active {
     color: #fff;
     width: 100%;
     margin-top: 17px;
@@ -727,6 +788,7 @@ select {
     }
   }
 }
+
 /* оформление карусели с отзывами */
 .review {
   margin-top: 20px;
@@ -754,12 +816,11 @@ select {
   }
 }
 
-
 /* кавычки */
 .quotes {
   position: absolute;
   width: 100%;
-  &::before, &::after{
+  &::before, &::after {
     content: ',,';
     position: absolute;
     top: 182px;
@@ -800,7 +861,7 @@ select {
     top: 0;
     width: 100%;
     z-index: 2;
-    >button {
+    > button {
       position: absolute;
       top: 50px;
       transition: opacity .5s ease;
@@ -829,6 +890,160 @@ select {
   display: flex;
 
 }
+
+.main-footer {
+  background-color: #242424;
+  padding: 3% 0;
+  color: #fff;
+  font-size: 14px;
+
+}
+
+.footer-column {
+  position: relative;
+  margin: 15px 0;
+  p {
+
+  }
+}
+
+.logo-footer {
+  width: 125px;
+  height: auto;
+  + p {
+    padding: 0;
+    margin-bottom: 15px;
+    color: #666666;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+}
+
+.social-footer {
+  margin-top: 38px;
+  height: auto;
+  .soc {
+    li {
+      display: inline-block;
+      margin: 3px;
+      a {
+        color: #ABABAB;
+        margin-bottom: 0;
+        transition: color .5s ease, background-color .5s ease;
+        &:hover {
+          color: rgba(#fff, .8);
+        }
+      }
+    }
+  }
+}
+
+.footer-menu {
+  ul {
+    li.active {
+      a {
+        color: $accent;
+        &::before {
+          color: $accent;
+        }
+      }
+    }
+    a {
+      position: relative;
+      color: #979797;
+      transition: color .25s ease;
+      display: inline-block;
+      padding: 4px 0 4px 20px;
+      text-decoration: underline;
+      &:hover, &:focus {
+        color: $accent;
+        &::before {
+          color: $accent;
+        }
+      }
+      &::before {
+        position: absolute;
+        content: '\f3a5';
+        font-family: "Font Awesome 5 Free";
+        left: 0;
+        font-size: 12px;
+        color: #fff;
+        transition: color .5s ease;
+        top: 6px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+.footer-addr {
+  position: relative;
+  font-size: 15px;
+  padding-left: 24px;
+  margin: 0 0 20px;
+  .fas, .far {
+    position: absolute;
+    left: 0;
+    top: 5px;
+    font-size: 18px;
+    color: #555555;
+  }
+  .footer-phone {
+    font-size: 26px;
+    font-family: 'firasansregular', sans-serif;
+    padding-top: 10px;
+    display: block;
+    white-space: nowrap;
+    .fas {
+      top: 20px;
+      font-size: 22px;
+      left: 2px;
+    }
+  }
+}
+
+.map {
+  max-height: 200px;
+  opacity: .7;
+  transition: opacity .5s ease;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.top {
+  position: fixed;
+  right: -100px;
+  bottom: 25px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  -webkit-border-radius: 10em;
+  -moz-border-radius: 10em;
+  border-radius: 10em;
+  background-color: #e0e0e0;
+  color: #666;
+  font-size: 26px;
+  line-height: 50px;
+  z-index: 12;
+  cursor: pointer;
+  transition: all .3s ease;
+  opacity: .5;
+  &:hover {
+    color: #fff;
+    background-color: $accent;
+    opacity: 1;
+  }
+  &.active {
+    right: 25px;
+  }
+}
+
+
+
+
+
 
 /* media */
 
@@ -866,11 +1081,21 @@ select {
       padding: 12% 0;
     }
   }
+  .footer-addr {
+    margin-bottom: 15px;
+    .footer-phone {
+      font-size: 24px;
+      padding-top: 0;
+      .fas {
+        top: 8px;
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
 
-  .header-contacts  {
+  .header-contacts {
     .phone-h {
       -ms-text-align-last: left;
       text-align-last: left;
@@ -880,9 +1105,9 @@ select {
     padding: 12px 40px;
   }
 
-  .partners{
+  .partners {
     .owl-nav {
-      >button {
+      > button {
         &.owl-prev {
           left: 0;
         }
@@ -897,13 +1122,27 @@ select {
       margin: 0;
     }
   }
+
+  .social-footer {
+    margin-top: 0;
+  }
+  .soc li a {
+    margin-top: 0;
+  }
+
+  .footer-menu {
+    margin-left: 20px;
+  }
 }
+
 @media (max-width: 575px) {
   .s {
     &-call {
       background-position: -400px;
     }
   }
+
+
 }
 
 @media (max-width: 480px) {
